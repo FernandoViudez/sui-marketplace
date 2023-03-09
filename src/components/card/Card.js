@@ -2,6 +2,7 @@ import './Card.css'
 import { useWallet } from '@suiet/wallet-kit';
 import { useEffect, useState } from 'react';
 import { getSUICoinForSpending } from '../_utils/query';
+import { environment } from '../constants/environment';
 
 export function Card(props) {
     const wallet = useWallet();
@@ -31,7 +32,7 @@ export function Card(props) {
             arguments: [props.value.publication.id.id, props.value.id.id, coin],
             function: 'buy_nft',
             module: 'buy',
-            packageObjectId: process.env.REACT_APP_PACKAGE_ID,
+            packageObjectId: environment.packageId,
             typeArguments: [],
             gasBudget: 1000
         })
@@ -49,7 +50,7 @@ export function Card(props) {
             arguments: [props.value.id.id, price],
             function: 'sell_nft',
             module: 'sell',
-            packageObjectId: process.env.REACT_APP_PACKAGE_ID,
+            packageObjectId: environment.packageId,
             typeArguments: [],
             gasBudget: 1000
         })

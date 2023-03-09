@@ -1,5 +1,6 @@
 import { useWallet } from '@suiet/wallet-kit';
 import { useState } from 'react';
+import { environment } from '../constants/environment';
 
 export function MintModal() {
     const wallet = useWallet();
@@ -51,7 +52,7 @@ export function MintModal() {
             arguments: [name, description, image],
             function: 'create_nft',
             module: 'mint',
-            packageObjectId: process.env.REACT_APP_PACKAGE_ID,
+            packageObjectId: environment.packageId,
             typeArguments: [],
             gasBudget: 10000
         });

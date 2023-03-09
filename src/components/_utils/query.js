@@ -1,4 +1,5 @@
 import { JsonRpcProvider } from '@mysten/sui.js';
+import { environment } from '../constants/environment';
 
 const provider = new JsonRpcProvider();
 
@@ -14,7 +15,7 @@ export const getObjectsInSell = async (sender) => {
         MoveFunction: {
             function: 'sell_nft',
             module: 'sell',
-            package: process.env.REACT_APP_PACKAGE_ID
+            package: environment.packageId
         },
     })
     const txns = txn.data;
@@ -53,7 +54,7 @@ export const getMyObjects = async (sender) => {
         MoveFunction: {
             function: 'create_nft',
             module: 'mint',
-            package: process.env.REACT_APP_PACKAGE_ID
+            package: environment.packageId
         },
     })
     for (let txn of txns.data) {
@@ -84,7 +85,7 @@ export const getNotPublishedObjects = async (sender) => {
 }
 
 export const getSUICoinForSpending = async (sender, balanceRequired) => {
-    const coins = await provider.getCoins(sender, process.env.REACT_APP_SUI_COIN_TYPE);
+    const coins = await provider.getCoins(sender, environment.coinType);
     let totalBalance = 0;
     for (let coin of coins.data) {
         if (coin.balance >= balanceRequired) {
